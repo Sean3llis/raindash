@@ -1,0 +1,75 @@
+body {
+  background-color: #2C3E50;
+  color: #F5F5F5;
+}
+
+td, th {
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+.table th {
+  border-top: none;
+}
+
+td svg {
+  width: 100%;
+  height: auto;
+}
+
+.block {
+  max-width: 800px;
+  margin: 0px auto;
+}
+
+#search-bar {
+  padding: 20px 0px;
+  background-color: #FFB041;
+}
+
+#search-bar form {
+  position: relative;
+}
+
+#weather-list {
+  padding: 20px 0px;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 4px;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: none;
+  transition: border 0.3s;
+}
+input[type="text"]:focus,
+input[type="text"].focus {
+}
+
+button[type="submit"] {
+  background-color: #F24B39;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #f5f5f5;
+  padding: 10px;
+  outline: none;
+  border: none;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 10;
+  height: 100%;
+  width: 80px;
+}
