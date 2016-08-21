@@ -1,38 +1,94 @@
 body {
-  background-color: #2C3E50;
+  background-color: #F5F5F5;
   color: #F5F5F5;
 }
 
-td, th {
-  vertical-align: middle !important;
-  text-align: center !important;
+.row {
+  margin: 0px;
 }
 
-.table th {
-  border-top: none;
-}
-
-td svg {
+.city-row svg {
   width: 100%;
   height: auto;
 }
 
 .block {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0px auto;
+  position: relative;
+}
+
+.shadowed {
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
 }
 
 #search-bar {
+  background-color: #1e2f41;
   padding: 20px 0px;
-  background-color: #FFB041;
+  position: relative;
 }
 
 #search-bar form {
   position: relative;
+  color: #1e2f41;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
 }
 
-#weather-list {
+#search-bar .fa {
+  text-shadow: 0px 1px rgba(0, 0, 0, 0.4);
+}
+
+.collapse-search-bar {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 48px;
+  height: 48px;
+  width: 48px;
+  transform: translateY(50%) translateX(50%);
+  background: #F24B39;
+  border-radius: 50%;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+}
+
+#weather-list .city-header {
+  color: #1e2f41;
+  text-align: center;
+  padding: 10px 0px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#weather-list hr {
+  margin: 0px;
+}
+
+#weather-list .city-row {
+  background-color: #fff;
+  color: #1e2f41;
+  text-align: center;
   padding: 20px 0px;
+  margin-top: 20px;
+}
+
+#weather-list .city-degrees {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+.label-default {
+  background-color: #F24B39;
 }
 
 input[type="text"] {
@@ -42,9 +98,9 @@ input[type="text"] {
   font-family: sans-serif;
   font-size: 18px;
   appearance: none;
-  box-shadow: none;
   border-radius: 4px;
 }
+
 input[type="text"]:focus {
   outline: none;
 }
@@ -53,9 +109,6 @@ input[type="text"] {
   padding: 10px;
   border: none;
   transition: border 0.3s;
-}
-input[type="text"]:focus,
-input[type="text"].focus {
 }
 
 button[type="submit"] {
@@ -72,4 +125,8 @@ button[type="submit"] {
   z-index: 10;
   height: 100%;
   width: 80px;
+}
+
+footer {
+  background-color: #1e2f41;
 }

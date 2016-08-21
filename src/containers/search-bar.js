@@ -30,11 +30,14 @@ class SearchBar extends Component {
         <input
           onChange={this.onInputChange}
           value={this.state.term}
-          placeholder="Austin, TX"
+          placeholder="City Name"
           type="text"
         />
-        <button type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
+        <button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></button>
       </form>
+      </div>
+      <div className="collapse-search-bar">
+      <i className="fa fa-long-arrow-up"></i>
       </div>
       </div>
     );
