@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { Motion, spring } from 'react-motion';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -9,21 +10,45 @@ import Chart from '../components/weather-chart';
 class WeatherList extends Component {
   constructor(props) {
     super(props);
-    this.emptyTable = this.emptyTable.bind(this);
+    this.renderWeather = this.renderWeather.bind(this);
+  }
+
+  renderTempBar(percent) {
+    console.log('rendering');
+    let style = {
+      width: `${percent}%`
+    };
+    return (
+      <div className="progress-wrapper">
+        <div className="progress">
+          {/* <Motion defaultStyle={{width: 0}} style={{width: `${percent}`}}>
+          {val => {
+            return <div className="progress-bar progress-bar-danger" style={val.width}></div>;
+          }}
+          </Motion> */}
+          <Motion defaultStyle={{width: 0}} style={{width: percent * 100}}>
+            {value => <div className="progress-bar progress-bar-danger" style={{width: `${value.width}%`}}></div>}
+          </Motion>
+        </div>
+      </div>
+    );
   }
 
   renderWeather(data) {
     const name = data.city.name;
     const temps = data.list.map(weather => weather.main.temp);
+    const avgTemp = temps.reduce((previous, current) => previous + current, 0) / temps.length;
+    const maxTemp = Math.max(...temps);
+    const minTemp = Math.min(...temps);
+    const currentTemp = data.list[0].main.temp;
     const pressures = data.list.map(weather => weather.main.pressure);
     const humidities = data.list.map(weather => weather.main.humidity);
     const color = '#1e2f41';
     return (
       <div className="row city-row card" key={data.city.id}>
         <div className="col-sm-12">
-          <div className="progress">
-            <div className="progress-bar progress-bar-danger" style={{width: '80%'}}></div>
-          </div>
+          <h4>average low/average high</h4>
+          {this.renderTempBar(currentTemp/maxTemp)}
         </div>
         <div className="col-sm-4">
           <h2>{data.city.name}</h2>
@@ -37,38 +62,8 @@ class WeatherList extends Component {
     );
   }
 
-  emptyTable() {
-    return (
-      <div id="weather-list" className="no-weather">
-        <div className="block">
-          <div className="row city-header card">
-            <div className="col-sm-12">a</div>
-            <div className="clearfix"></div>
-          </div>
-          <div className="row empty-row city-row card">
-            <div className="col-sm-12">
-              <div className="progress">
-                <div className="progress-bar progress-bar-danger" style={{width: '80%'}}></div>
-              </div>
-            </div>
-            <div className="col-sm-4">
-              <h2>           </h2>
-              <hr/>
-              <span className="city-degrees">80°</span>
-            </div>
-            <div className="col-sm-4"></div>
-            <div className="col-sm-4"></div>
-            <div className="clearfix"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   render() {
-    if (this.props.weather.length === 0) {
-      return this.emptyTable();
-    } else {
+    if (this.props.weather.length) {
       return (
         <div id="weather-list">
           <div className="block">
@@ -82,6 +77,12 @@ class WeatherList extends Component {
             {this.props.weather.map(this.renderWeather)}
             </div>
           </div>
+        </div>
+      );
+    } else {
+      return (
+        <div id="weather-list">
+          enter a city to begin..
         </div>
       );
     }

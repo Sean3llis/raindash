@@ -13,7 +13,7 @@ export default props => {
       <Sparklines height={100} margin={20} data={props.data}>
         <SparklinesReferenceLine type="max" style={{ stroke: '#F5F5F5', strokeOpacity: 1, strokeWidth: 1, strokeDasharray: '1, 1' }} />
         <SparklinesReferenceLine type="mean" style={{ stroke: '#F5F5F5', strokeOpacity: 1, strokeWidth: 1, strokeDasharray: '1, 1' }} />
-        <SparklinesLine style={{ strokeWidth: 2, stroke: "#F24B39", fill: "none" }} />
+        <SparklinesLine style={{ strokeWidth: 1, stroke: "#1e2f41", fill: "none" }} />
         <SparklinesSpots size={2} style={{ fill: "#F24B39" }} />
       </Sparklines>
       <div>Average: {average(props.data) + props.units}</div>
