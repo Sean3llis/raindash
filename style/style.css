@@ -7,10 +7,6 @@ body {
   margin: 0px;
 }
 
-.city-row svg {
-  width: 100%;
-  height: auto;
-}
 
 .block {
   max-width: 1200px;
@@ -63,12 +59,35 @@ body {
   margin: 0px;
 }
 
-#weather-list .city-row {
+.city-row {
   background-color: #fff;
-  color: #1e2f41;
+  color: #464646;
+  position: relative;
   text-align: center;
   padding: 20px 0px;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
+}
+
+.city-row svg {
+  width: 100%;
+  height: auto;
+}
+
+.city-row .download-icon-container {
+  position: absolute;
+  padding: 8px;
+  right: 10px;
+  top: 10px;
+  z-index: 100;
+}
+
+.city-row .download-icon-container:hover {
+  cursor: pointer;
+}
+
+.city-row .download-icon {
+  height: 20px;
+  width: 20px;
 }
 
 #weather-list .city-degrees {
@@ -79,6 +98,19 @@ body {
 
 .progress-wrapper {
   padding: 0px 40px;
+  position: relative;
+}
+
+.progress-wrapper:after {
+  content: '';
+  background-color: #e74c3c;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(50%);
+  left: 0px;
+  height: 30px;
+  width: 30px;
 }
 
 .label-default {
