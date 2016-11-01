@@ -6,7 +6,7 @@ import _ from 'lodash';
 /**
  * ACTIONS
  */
-import starCity from '../actions/index';
+import { saveCity, closeCity } from '../actions/index';
 
 /**
  * COMPONENTS
@@ -16,6 +16,17 @@ import CityRow from '../components/city-row';
 class WeatherList extends Component {
   constructor(props) {
     super(props);
+    this.createRow = this.createRow.bind(this);
+  }
+
+  createRow(city) {
+    return (
+      <CityRow
+        onSave={this.props.onSave}
+        onClose={this.props.onClose}
+        key={city.id}
+        data={city} />
+    );
   }
 
   render() {
@@ -23,15 +34,7 @@ class WeatherList extends Component {
       return (
         <div id="weather-list">
           <div className="block">
-            <div>
-              {this.props.cities.map(city => {
-                return (
-                  <CityRow
-                    key={city.id}
-                    data={city} />
-                );
-              })}
-            </div>
+            {this.props.cities.map(this.createRow)}
           </div>
         </div>
       );
@@ -46,7 +49,15 @@ class WeatherList extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log('state ~~>', state);
   return state;
 }
 
-export default connect(mapStateToProps)(WeatherList);
+const mapDispatchToProps = dispatch => {
+  return {
+    onSave: cityID => { dispatch( saveCity( cityID ) ) },
+    onClose: cityID => { dispatch( closeCity( cityID ) ) },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherList);

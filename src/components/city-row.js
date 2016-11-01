@@ -14,8 +14,6 @@ class CityRow extends Component {
       saved: false
     };
     this.renderTempBar = this.renderTempBar.bind(this);
-    this.onSave = this.onSave.bind(this);
-    this.onClose = this.onClose.bind(this);
   };
 
   renderTempBar(percent) {
@@ -33,15 +31,8 @@ class CityRow extends Component {
     );
   };
 
-  onSave() {
-    console.log('save');
-  }
-
-  onClose() {
-    console.log('close');
-  }
-
   render() {
+    const ID = this.props.data.id;
     const data = this.props.data;
     const color = this.props.color;
     let closeIcon = (<i className="fa fa-close close-icon icon"></i>);
@@ -51,8 +42,8 @@ class CityRow extends Component {
     return (
       <div className="row city-row card">
         <div className="icon-wrapper">
-          <span onClick={() => this.onClose()}>{closeIcon}</span>
-          <span onClick={() => this.onSave()}>{currentSaveIcon}</span>
+          <span onClick={() => this.props.onClose(ID)}>{closeIcon}</span>
+          <span onClick={() => this.props.onSave(ID)}>{currentSaveIcon}</span>
         </div>
         <hr/>
         <div className="col-sm-4">

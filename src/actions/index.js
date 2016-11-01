@@ -6,9 +6,10 @@ const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KE
 export const FETCH_WEATHER = 'FETCH_WEATHER';
 export const REQUESTING_WEATHER = 'REQUESTING_WEATHER';
 export const RECEIVED_WEATHER = 'RECEIVED_WEATHER';
+export const SAVE_CITY = 'SAVE_CITY';
+export const CLOSE_CITY = 'CLOSE_CITY';
 
 const receivedWeather = json => {
-  console.log('json ~~>', json);
   return {
     type: RECEIVED_WEATHER,
     payload: json
@@ -25,9 +26,16 @@ export const fetchWeather = city => dispatch => {
       });
 };
 
-export function starCity(city) {
+export function saveCity(id) {
   return {
-    type: STAR_CITY,
-    payload: { city }
+    type: SAVE_CITY,
+    payload: { id }
+  }
+};
+
+export function closeCity(id) {
+  return {
+    type: CLOSE_CITY,
+    payload: { id }
   }
 };
