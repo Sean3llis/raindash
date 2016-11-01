@@ -44,7 +44,7 @@ body {
 }
 
 #weather-list {
-  padding: 0px 15px;
+  padding: 12px;
 }
 
 #weather-list .city-header {
@@ -64,7 +64,7 @@ body {
   color: #464646;
   position: relative;
   text-align: center;
-  padding: 20px 0px;
+  padding: 12px;
   /*margin-top: 20px;*/
 }
 
@@ -76,7 +76,7 @@ body {
 .city-row .download-icon-container {
   position: absolute;
   padding: 8px;
-  right: 10px;
+  left: 10px;
   top: 10px;
   z-index: 100;
 }
@@ -86,8 +86,35 @@ body {
 }
 
 .city-row .download-icon {
-  height: 20px;
-  width: 20px;
+  /*width: 20px;*/
+}
+
+.icon-wrapper {
+  text-align: left;
+}
+
+.icon-wrapper .icon {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 2px;
+  color: #fff;
+  margin: 0px 4px 0px 0px;
+}
+
+.icon-wrapper .save-icon {
+  background-color: #EFCE4A;
+}
+
+.icon-wrapper .close-icon {
+  background-color: #e74c3c;
+  margin-right: 6px;
+}
+
+.icon-wrapper .icon:hover {
+  cursor: pointer;
 }
 
 #weather-list .city-degrees {
@@ -152,6 +179,7 @@ button[type="submit"] {
   height: 100%;
   width: 80px;
 }
+
 
 footer {
   background-color: #1e2f41;
