@@ -20,20 +20,20 @@ export default function(cities = [], action) {
       });
       return newState;
 
-    case ACTN.SAVE_CITY:
-      var ID = action.payload.id;
+    case ACTN.TOGGLE_CITY:
       var offlineCities = JSON.parse(localStorage.getItem('cities')) || [];
+      const ID = action.payload.id;
       var newState = cities.map(city => {
-        if (city.id === ID) {
-          city.saved = true
-          offlineCities.push(city);
-        };
+        if (city.id == ID) {
+          city.saved = !city.saved;
+        }
         return city;
       });
-      localStorage.setItem('cities', JSON.stringify(offlineCities));
+      var newOfflineCities = newState.filter(city => city.saved);
+      localStorage.setItem('cities', JSON.stringify(newOfflineCities));
       return newState;
     default:
-      var savedCities = JSON.parse(localStorage.getItem('cities'));
+      var savedCities = _.uniqBy(JSON.parse(localStorage.getItem('cities')), 'id');
       return (savedCities)
         ? savedCities
         : cities;

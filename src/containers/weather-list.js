@@ -6,7 +6,7 @@ import _ from 'lodash';
 /**
  * ACTIONS
  */
-import { saveCity, closeCity } from '../actions/index';
+import { toggleSave, closeCity } from '../actions/index';
 
 /**
  * COMPONENTS
@@ -22,7 +22,7 @@ class WeatherList extends Component {
   createRow(city) {
     return (
       <CityRow
-        onSave={this.props.onSave}
+        onToggleSave={this.props.onToggleSave}
         onClose={this.props.onClose}
         key={city.id}
         data={city} />
@@ -49,14 +49,13 @@ class WeatherList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state ~~>', state);
   return state;
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSave: cityID => { dispatch( saveCity( cityID ) ) },
-    onClose: cityID => { dispatch( closeCity( cityID ) ) },
+    onToggleSave: cityID => { dispatch( toggleSave(cityID) )},
+    onClose: cityID => { dispatch( closeCity(cityID) )},
   }
 }
 

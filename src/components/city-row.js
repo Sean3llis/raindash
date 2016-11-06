@@ -36,16 +36,15 @@ class CityRow extends Component {
     const data = this.props.data;
     const color = this.props.color;
     let closeIcon = (<i className="fa fa-close close-icon icon"></i>);
-    let currentSaveIcon = (this.state.saved)
+    let currentSaveIcon = (this.props.data.saved)
       ? (<i className="fa fa-star save-icon icon"></i>)
       : (<i className="fa fa-star-o save-icon icon"></i>);
     return (
       <div className="row city-row card">
         <div className="icon-wrapper">
           <span onClick={() => this.props.onClose(ID)}>{closeIcon}</span>
-          <span onClick={() => this.props.onSave(ID)}>{currentSaveIcon}</span>
+          <span onClick={() => this.props.onToggleSave(ID)}>{currentSaveIcon}</span>
         </div>
-        <hr/>
         <div className="col-sm-4">
           <h2>{data.name}</h2>
           <hr/>
