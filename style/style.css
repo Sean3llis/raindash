@@ -138,6 +138,8 @@ body {
   left: 0px;
   height: 30px;
   width: 30px;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
 }
 
 .label-default {
@@ -180,6 +182,45 @@ button[type="submit"] {
   width: 80px;
 }
 
+.chart-wrapper {
+  position: relative;
+}
+
+.legend {
+  position: absolute;
+  color: #cccccc;
+  font-weight: 200;
+  font-size: 12px;
+}
+
+.legend-x {
+  top: -4px;
+}
+
+.legend.now {
+  left: 18px;
+}
+
+.legend.mid {
+  left: 50%;
+}
+
+.legend.later {
+  right: 18px;
+}
+
+.legend-y {
+  left: -12px;
+}
+
+.legend-y.max {
+  position: absolute;
+  top: 12px;
+}
+
+.legend-y.min {
+  bottom: 22px;
+}
 
 footer {
   background-color: #1e2f41;

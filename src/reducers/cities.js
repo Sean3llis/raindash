@@ -6,6 +6,7 @@ export default function(cities = [], action) {
   switch (action.type) {
 
     case ACTN.RECEIVED_WEATHER:
+    console.log('action.payload ~~>', action.payload);
       var newCity = weatherParser(action.payload);
       var oldState = cities.filter(city => {
         if (city.id === newCity.id) newCity.saved = city.saved;
