@@ -8,6 +8,7 @@ export default function(cities = [], action) {
     case ACTN.RECEIVED_WEATHER:
       var newCity = weatherParser(action.payload);
       var oldState = cities.filter(city => {
+        if (city.id === newCity.id) newCity.saved = city.saved;
         return city.id !== newCity.id;
       });
       var newState = [newCity, ...oldState];

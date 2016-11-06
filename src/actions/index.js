@@ -17,7 +17,6 @@ const receivedWeather = json => {
 }
 
 export const fetchWeather = city => dispatch => {
-  // dispatch({ type: REQUESTING_WEATHER });
   const url = `${ROOT_URL}&q=${city},us`;
     return fetch(url)
       .then(response => response.json())
