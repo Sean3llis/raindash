@@ -70,8 +70,12 @@ body {
   color: #464646;
   position: relative;
   text-align: center;
-  padding: 12px;
   margin-top: 12px;
+  overflow: hidden;
+}
+
+.city-row-inner {
+  padding: 12px;
 }
 
 .city-row:first-child {

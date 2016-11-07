@@ -19,10 +19,12 @@ class WeatherList extends Component {
     super(props);
     this.getDefaultStyles = this.getDefaultStyles.bind(this);
     this.getStyles = this.getStyles.bind(this);
+    this.willEnter = this.willEnter.bind(this);
+    this.willLeave = this.willLeave.bind(this);
   }
 
   getDefaultStyles() {
-    return this.props.cities.map((city, i) => ({...city, key: `${city.id}`, style: {x: -200, opacity: 0}}));
+    return this.props.cities.map((city, i) => ({...city, key: `${city.id}`, style: {y: -100, opacity: 0}}));
   }
 
   getStyles() {
@@ -31,11 +33,24 @@ class WeatherList extends Component {
         data: city,
         key: `${city.id}`,
         style: {
-          x: spring(0, presets.gentle),
+          y: spring(0, presets.gentle),
           opacity: spring(1, presets.gentle)
         }
       };
     });
+  }
+
+  willEnter() {
+    return {
+      y: -100,
+      opacity: 0,
+    };
+  }
+
+  willLeave() {
+    return {
+      opacity: spring(0, presets.gentle),
+    };
   }
 
   render() {
@@ -43,6 +58,8 @@ class WeatherList extends Component {
       return (
         <div id="weather-list">
           <TransitionMotion
+            willEnter={this.willEnter}
+            willLeave={this.willLeave}
             defaultStyles={this.getDefaultStyles()}
             styles={this.getStyles()}>
             {styles =>
@@ -53,7 +70,7 @@ class WeatherList extends Component {
                   key={key}
                   onToggleSave={this.props.onToggleSave}
                   onClose={this.props.onClose}
-                  data={data}></CityRow>
+                  data={data} />
               )};
               </div>
             }

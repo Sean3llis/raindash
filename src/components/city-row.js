@@ -10,7 +10,6 @@ import Chart from '../components/weather-chart';
 class CityRow extends Component {
   constructor(props) {
     super(props);
-    console.log('this.props ~~>', this.props);
     this.state = {
       saved: false
     };
@@ -42,7 +41,8 @@ class CityRow extends Component {
       ? (<i className="fa fa-star save-icon icon"></i>)
       : (<i className="fa fa-star-o save-icon icon"></i>);
     return (
-        <div className="row city-row card" style={{transform: `translateX(${this.props.style.x}px)`}}>
+        <div className="row city-row card" style={{transform: `translateY(${this.props.style.y}px)`, opacity: this.props.style.opacity}}>
+          <div className="city-row-inner">
           <div className="icon-wrapper">
             <span onClick={() => this.props.onClose(ID)}>{closeIcon}</span>
             <span onClick={() => this.props.onToggleSave(ID)}>{currentSaveIcon}</span>
@@ -58,6 +58,7 @@ class CityRow extends Component {
           <div className="col-sm-4"><Chart title={'Temperature'} data={data.temps} color={color} units="°" /></div>
           <div className="col-sm-4"><Chart title={'Humidity'} data={data.humidities} color={color} units="%" /></div>
           <div className="clearfix"></div>
+          </div>
         </div>
     );
   };
