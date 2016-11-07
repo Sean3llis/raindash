@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { TransitionMotion, Motion, spring, presets } from 'react-motion';
 import _ from 'lodash';
 /**
  * ACTIONS
@@ -16,26 +17,47 @@ import CityRow from '../components/city-row';
 class WeatherList extends Component {
   constructor(props) {
     super(props);
-    this.createRow = this.createRow.bind(this);
+    this.getDefaultStyles = this.getDefaultStyles.bind(this);
+    this.getStyles = this.getStyles.bind(this);
   }
 
-  createRow(city) {
-    return (
-      <CityRow
-        onToggleSave={this.props.onToggleSave}
-        onClose={this.props.onClose}
-        key={city.id}
-        data={city} />
-    );
+  getDefaultStyles() {
+    return this.props.cities.map((city, i) => ({...city, key: `${city.id}`, style: {x: -200, opacity: 0}}));
+  }
+
+  getStyles() {
+    return this.props.cities.map(city => {
+      return {
+        data: city,
+        key: `${city.id}`,
+        style: {
+          x: spring(0, presets.gentle),
+          opacity: spring(1, presets.gentle)
+        }
+      };
+    });
   }
 
   render() {
     if (this.props.cities.length) {
       return (
         <div id="weather-list">
-          <div className="block">
-            {this.props.cities.map(this.createRow)}
-          </div>
+          <TransitionMotion
+            defaultStyles={this.getDefaultStyles()}
+            styles={this.getStyles()}>
+            {styles =>
+              <div className="block">
+              {styles.map(({key, style, data}) =>
+                <CityRow
+                  style={style}
+                  key={key}
+                  onToggleSave={this.props.onToggleSave}
+                  onClose={this.props.onClose}
+                  data={data}></CityRow>
+              )};
+              </div>
+            }
+          </TransitionMotion>
         </div>
       );
     } else {

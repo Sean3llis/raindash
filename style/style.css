@@ -57,6 +57,12 @@ body {
 
 #weather-list hr {
   margin: 0px;
+  max-width: 80px;
+  margin: 0 auto;
+}
+
+#weather-list .name-plate {
+  margin-bottom: 16px;
 }
 
 .city-row {
@@ -65,7 +71,11 @@ body {
   position: relative;
   text-align: center;
   padding: 12px;
-  /*margin-top: 20px;*/
+  margin-top: 12px;
+}
+
+.city-row:first-child {
+  margin-top: 0px;
 }
 
 .city-row svg {
@@ -94,10 +104,10 @@ body {
 }
 
 .icon-wrapper .icon {
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-  font-size: 14px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  font-size: 10px;
   text-align: center;
   border-radius: 2px;
   color: #fff;
@@ -105,7 +115,7 @@ body {
 }
 
 .icon-wrapper .save-icon {
-  background-color: #EFCE4A;
+  background-color: #1e2f41;
 }
 
 .icon-wrapper .close-icon {
@@ -186,6 +196,26 @@ button[type="submit"] {
   position: relative;
 }
 
+.chart-wrapper:before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 1px;
+  height: 70%;
+  background-color: #ecf0f1;
+}
+
+.chart-wrapper:after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  height: 1px;
+  width: 100%;
+  background-color: #ecf0f1;
+}
+
 .legend {
   position: absolute;
   color: #cccccc;
@@ -210,16 +240,26 @@ button[type="submit"] {
 }
 
 .legend-y {
-  left: -12px;
+  left: -16px;
 }
 
 .legend-y.max {
   position: absolute;
-  top: 12px;
+  top: 16px;
 }
 
 .legend-y.min {
-  bottom: 22px;
+  bottom: 32px;
+}
+
+.chart-title {
+  font-size: 14px;
+  position: absolute;
+  margin: 0 auto;
+  letter-spacing: 2px;
+  left: 0px;
+  right: 0px;
+  bottom: 2px;
 }
 
 footer {
