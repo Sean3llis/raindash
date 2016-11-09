@@ -80,7 +80,7 @@ class WeatherList extends Component {
     } else {
       return (
         <div id="weather-list">
-          enter a city to begin..
+          <div className="no-weather">enter a city to begin..</div>
         </div>
       );
     }
