@@ -5,7 +5,8 @@ import { TransitionMotion, Motion, spring, presets } from 'react-motion';
 
 
 import SaveIcon from '../components/save-icon';
-import Chart from '../components/weather-chart';
+import WeatherChart from '../components/chart-weather';
+import RainChart from '../components/chart-rain';
 
 class CityRow extends Component {
   constructor(props) {
@@ -55,8 +56,13 @@ class CityRow extends Component {
             </div>
             {this.renderTempBar(data.currentTemp/105)}
           </div>
-          <div className="col-sm-4"><Chart title={'Temperature'} data={data.temps} color={color} units="°" /></div>
-          <div className="col-sm-4"><Chart title={'Humidity'} data={data.humidities} color={color} units="%" /></div>
+          <div className="col-sm-4">
+            <div className="rain-wrapper">
+              <RainChart title={'Rain'} hasRain={data.hasRain} data={data.rains} color={color} units="°" />
+              <WeatherChart title={'Temperature'} data={data.temps} color={color} units="°" />
+            </div>
+          </div>
+          <div className="col-sm-4"><WeatherChart title={'Humidity'} data={data.humidities} color={color} units="%" /></div>
           <div className="clearfix"></div>
           </div>
         </div>

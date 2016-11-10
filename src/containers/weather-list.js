@@ -33,8 +33,8 @@ class WeatherList extends Component {
         data: city,
         key: `${city.id}`,
         style: {
-          y: spring(0, presets.gentle),
-          opacity: spring(1, presets.gentle)
+          y: spring(0, presets.wobbly),
+          opacity: spring(1, presets.wobbly)
         }
       };
     });
@@ -49,7 +49,7 @@ class WeatherList extends Component {
 
   willLeave() {
     return {
-      opacity: spring(0, presets.gentle),
+      opacity: spring(0),
     };
   }
 

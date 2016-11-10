@@ -3,10 +3,6 @@ import _ from 'lodash';
 import React from 'react';
 import { Sparklines, SparklinesLine, SparklinesCurve, SparklinesSpots, SparklinesReferenceLine } from 'react-sparklines';
 
-function average(data) {
-  return _.round(_.sum(data)/data.length);
-}
-
 const avg = data => _.round(_.sum(data)/data.length);
 const max = data => _.round(_.max(data));
 const min = data => _.round(_.min(data));

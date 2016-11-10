@@ -1,6 +1,12 @@
 body {
   background-color: #F5F5F5;
   color: #F5F5F5;
+  font-family: 'Merriweather', serif !important;
+}
+
+h2 {
+  font-family: 'Merriweather', serif !important;
+  font-weight: 200;
 }
 
 .row {
@@ -113,7 +119,7 @@ body {
   line-height: 20px;
   font-size: 10px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 50%;
   color: #fff;
   margin: 0px 4px 0px 0px;
 }
@@ -266,6 +272,11 @@ button[type="submit"] {
   bottom: 2px;
 }
 
+.rain-chart {
+  position: absolute;
+  top: 0px;
+}
+
 footer {
   background-color: #1e2f41;
 }
@@ -275,4 +286,11 @@ footer {
   text-align: center;
   font-size: 20px;
   padding-top: 20px;
+}
+
+
+@media (max-width: 767px) {
+  .chart-wrapper {
+    margin-top: 30px;
+  }
 }
