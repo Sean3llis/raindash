@@ -48,7 +48,7 @@ class CityRow extends Component {
             <span onClick={() => this.props.onClose(ID)}>{closeIcon}</span>
             <span onClick={() => this.props.onToggleSave(ID)}>{currentSaveIcon}</span>
           </div>
-          <div className="col-sm-4">
+          <div className="col-md-4">
             <div className="name-plate">
               <h2>{data.name}</h2>
               <hr/>
@@ -56,13 +56,13 @@ class CityRow extends Component {
             </div>
             {this.renderTempBar(data.currentTemp/105)}
           </div>
-          <div className="col-sm-4">
+          <div className="col-md-4">
             <div className="rain-wrapper">
-              <RainChart title={'Rain'} hasRain={data.hasRain} data={data.rains} color={color} units="°" />
+              <RainChart title={'Rain'} data={data} units="°" />
               <WeatherChart title={'Temperature'} data={data.temps} color={color} units="°" />
             </div>
           </div>
-          <div className="col-sm-4"><WeatherChart title={'Humidity'} data={data.humidities} color={color} units="%" /></div>
+          <div className="col-md-4"><WeatherChart title={'Humidity'} data={data.humidities} color={color} units="%" /></div>
           <div className="clearfix"></div>
           </div>
         </div>

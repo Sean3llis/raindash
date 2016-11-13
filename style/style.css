@@ -206,7 +206,7 @@ button[type="submit"] {
   position: relative;
 }
 
-.chart-wrapper:before {
+/*.chart-wrapper:before {
   content: '';
   position: absolute;
   top: 12px;
@@ -224,6 +224,15 @@ button[type="submit"] {
   height: 1px;
   width: 100%;
   background-color: #ecf0f1;
+}*/
+
+.chart-wrapper .grid {
+  position: absolute;
+  width: 100%;
+  max-height: 78%;
+  top: 0px;
+  left: 0px;
+  z-index: -10;
 }
 
 .legend {
@@ -253,6 +262,18 @@ button[type="submit"] {
   left: -16px;
 }
 
+.legend-rain {
+  right: 0px;
+}
+
+.legend-rain.max {
+  top: 16px;
+}
+
+.legend-rain.min {
+  bottom: 32px;
+}
+
 .legend-y.max {
   position: absolute;
   top: 16px;
@@ -262,19 +283,49 @@ button[type="submit"] {
   bottom: 32px;
 }
 
-.chart-title {
-  font-size: 14px;
-  position: absolute;
-  margin: 0 auto;
-  letter-spacing: 2px;
-  left: 0px;
+.legend.rain-key {
+  font-family: helvetica, arial, sans-serif;
+  bottom: 10px;
   right: 0px;
-  bottom: 2px;
+  font-size: 12px;
+}
+
+.legend.rain-key:before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  border-radius: 50%;
+  left: -14px;
+  top: 2px;
+  background-color: #66ccc1;
+}
+
+.chart-title {
+  font-family: helvetica, arial, sans-serif;
+  bottom: 10px;
+  left: 38px;
+  font-size: 12px;
+}
+
+.chart-title:before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  position: absolute;
+  left: -28px;
+  top: 8px;
+  background-color: #1e2f41;
+}
+
+.rain-wrapper {
+  position: relative;
 }
 
 .rain-chart {
   position: absolute;
   top: 0px;
+  width: 100%;
 }
 
 footer {

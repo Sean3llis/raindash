@@ -4,22 +4,23 @@ export default (rawData) => {
   const city = rawData.city;
   const name = city.name;
   const id = city.id;
-  const temps = rawData.list.map(weather => weather.main.temp);
-  const avgTemp = temps.reduce((previous, current) => previous + current, 0) / temps.length;
+  let temps = [];
+  let humidities = [];
+  let rains = [];
+  let hasRain = false;
+  rawData.list.map(weather => {
+    temps.push(weather.main.temp);
+    humidities.push(weather.main.temp);
+    rains.push((weather.rain && weather.rain['3h']) ? weather.rain['3h'] : 0);
+  });
   const maxTemp = Math.max(...temps);
   const minTemp = Math.min(...temps);
-  const currentTemp = rawData.list[0].main.temp;
-  const humidities = rawData.list.map(weather => weather.main.humidity);
-  const rains = [];
-  var hasRain = false;
-  rawData.list.map(d => {
-    if (d.rain && d.rain['3h']) {
-      rains.push(d.rain['3h']);
-      hasRain = true;
-    } else {
-      rains.push(0);
-    }
-  });
+  const avgTemp = (temps.reduce((p, c) => p + c), 0) / temps.length;
+  const maxRain = Math.max(...rains);
+  const minRain = Math.min(...rains);
+  const currentTemp = temps[0];
+  if (maxRain > 0) hasRain = true;
+
   return {
     id,
     city,
@@ -31,6 +32,8 @@ export default (rawData) => {
     minTemp,
     currentTemp,
     rains,
-    hasRain
+    hasRain,
+    maxRain,
+    minRain,
   };
 }
