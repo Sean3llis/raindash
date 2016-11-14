@@ -1,7 +1,7 @@
 'use strict';
 import _ from 'lodash';
 import React from 'react';
-import { Sparklines, SparklinesLine, SparklinesBars, SparklinesCurve, SparklinesSpots, SparklinesReferenceLine } from 'react-sparklines';
+import { Sparklines, SparklinesLine, SparklinesNormalBand } from 'react-sparklines';
 
 const avg = data => _.round(_.sum(data)/data.length);
 const max = data => _.round(_.max(data));

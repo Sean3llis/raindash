@@ -1,7 +1,7 @@
 'use strict';
 import _ from 'lodash';
 import React from 'react';
-import { Sparklines, SparklinesLine, SparklinesCurve, SparklinesSpots, SparklinesReferenceLine } from 'react-sparklines';
+import { Sparklines, SparklinesLine, SparklinesCurve, SparklinesSpots, SparklinesNormalBand, SparklinesReferenceLine } from 'react-sparklines';
 import Grid from './grid';
 
 const avg = data => _.round(_.sum(data)/data.length);
