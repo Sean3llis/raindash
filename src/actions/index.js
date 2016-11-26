@@ -11,11 +11,12 @@ export const TOGGLE_CITY = 'TOGGLE_CITY';
 export const CLOSE_CITY = 'CLOSE_CITY';
 
 export const fetchWeather = city => dispatch => {
-  dispatch({ type: REQUESTING_WEATHER });
+  dispatch({ type: REQUESTING_WEATHER, payload: true });
   const url = `${ROOT_URL}&q=${city},us`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
+        dispatch({ type: REQUESTING_WEATHER, payload: false });
         dispatch(receivedWeather(json))
       });
 };

@@ -11,6 +11,7 @@ class SearchBar extends Component {
     this.state = { term: '' };
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.submitIcon = this.submitIcon.bind(this);
   }
 
   onInputChange(e) {
@@ -23,18 +24,28 @@ class SearchBar extends Component {
     this.setState({ term: '' });
   }
 
+  submitIcon() {
+    if (this.props.requestingWeather) {
+      return (<i className="fa fa-circle-o-notch fa-fw fa-spin" aria-hidden="true"></i>)
+    } else {
+      return (<i className="fa fa-plus" aria-hidden="true"></i>);
+    }
+  }
+
   render() {
     return (
       <div id="search-bar">
       <div className="block">
       <form onSubmit={this.onFormSubmit}>
         <input
+          tabIndex={1}
+          disabled={this.props.requestingWeather}
           onChange={this.onInputChange}
           value={this.state.term}
           placeholder="City Name"
           type="text"
         />
-        <button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></button>
+        <button type="submit">{this.submitIcon()}</button>
       </form>
       </div>
       </div>
@@ -43,8 +54,10 @@ class SearchBar extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('state ~~>', state);
   return {
-    weather: state
+    cities: state.cities,
+    requestingWeather: state.requestingWeather
   };
 }
 

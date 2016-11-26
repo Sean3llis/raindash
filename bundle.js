@@ -21815,6 +21815,7 @@
 	    _this.state = { term: '' };
 	    _this.onInputChange = _this.onInputChange.bind(_this);
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
+	    _this.submitIcon = _this.submitIcon.bind(_this);
 	    return _this;
 	  }
 	
@@ -21831,6 +21832,15 @@
 	      this.setState({ term: '' });
 	    }
 	  }, {
+	    key: 'submitIcon',
+	    value: function submitIcon() {
+	      if (this.props.requestingWeather) {
+	        return _react2.default.createElement('i', { className: 'fa fa-circle-o-notch fa-fw fa-spin', 'aria-hidden': 'true' });
+	      } else {
+	        return _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -21843,6 +21853,8 @@
 	            'form',
 	            { onSubmit: this.onFormSubmit },
 	            _react2.default.createElement('input', {
+	              tabIndex: 1,
+	              disabled: this.props.requestingWeather,
 	              onChange: this.onInputChange,
 	              value: this.state.term,
 	              placeholder: 'City Name',
@@ -21851,7 +21863,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              { type: 'submit' },
-	              _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' })
+	              this.submitIcon()
 	            )
 	          )
 	        )
@@ -21863,8 +21875,10 @@
 	}(_react.Component);
 	
 	function mapStateToProps(state) {
+	  console.log('state ~~>', state);
 	  return {
-	    weather: state
+	    cities: state.cities,
+	    requestingWeather: state.requestingWeather
 	  };
 	}
 	
@@ -21906,21 +21920,23 @@
 	var TOGGLE_CITY = exports.TOGGLE_CITY = 'TOGGLE_CITY';
 	var CLOSE_CITY = exports.CLOSE_CITY = 'CLOSE_CITY';
 	
-	var receivedWeather = function receivedWeather(json) {
-	  return {
-	    type: RECEIVED_WEATHER,
-	    payload: json
-	  };
-	};
-	
 	var fetchWeather = exports.fetchWeather = function fetchWeather(city) {
 	  return function (dispatch) {
+	    dispatch({ type: REQUESTING_WEATHER, payload: true });
 	    var url = ROOT_URL + '&q=' + city + ',us';
 	    return fetch(url).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
+	      dispatch({ type: REQUESTING_WEATHER, payload: false });
 	      dispatch(receivedWeather(json));
 	    });
+	  };
+	};
+	
+	var receivedWeather = function receivedWeather(json) {
+	  return {
+	    type: RECEIVED_WEATHER,
+	    payload: json
 	  };
 	};
 	
@@ -43303,10 +43319,26 @@
 	
 	var _cities2 = _interopRequireDefault(_cities);
 	
+	var _index = __webpack_require__(197);
+	
+	var ACTN = _interopRequireWildcard(_index);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var rootReducer = (0, _redux.combineReducers)({
-	  cities: _cities2.default
+	  cities: _cities2.default,
+	  requestingWeather: function requestingWeather() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	    var action = arguments[1];
+	
+	    if (action.type === ACTN.REQUESTING_WEATHER) {
+	      return action.payload;
+	    } else {
+	      return state;
+	    }
+	  }
 	});
 	
 	exports.default = rootReducer;
@@ -43338,6 +43370,11 @@
 	
 	  var _ret = function () {
 	    switch (action.type) {
+	      case ACTN.REQUESTING_WEATHER:
+	        console.log('action ~~>', action);
+	        return {
+	          v: cities
+	        };
 	
 	      case ACTN.RECEIVED_WEATHER:
 	        newCity = (0, _weatherParser2.default)(action.payload);
@@ -43368,9 +43405,7 @@
 	
 	        var ID = action.payload.id;
 	        newState = cities.map(function (city) {
-	          if (city.id == ID) {
-	            city.saved = !city.saved;
-	          }
+	          if (city.id == ID) city.saved = !city.saved;
 	          return city;
 	        });
 	        newOfflineCities = newState.filter(function (city) {
