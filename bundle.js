@@ -43171,7 +43171,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function (props) {
-	  var squareUnit = 12;
+	  var squareUnit = 6;
 	  return _react2.default.createElement(
 	    "svg",
 	    { className: "grid", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", width: "400px", height: "300px" },
@@ -43181,7 +43181,7 @@
 	      _react2.default.createElement(
 	        "pattern",
 	        { id: "grid-pattern", width: squareUnit, height: squareUnit, patternUnits: "userSpaceOnUse" },
-	        _react2.default.createElement("path", { d: "M 0 0 L 12 0 12 12 0 12 z", stroke: "#f5f5f5", strokeWidth: "1", fill: "none" })
+	        _react2.default.createElement("path", { d: "M 0 0 L 12 0 12 12 0 12 z", stroke: "#ecf0f1", strokeWidth: "1", fill: "none" })
 	      )
 	    ),
 	    _react2.default.createElement("rect", { fill: "url(#grid-pattern)", height: "100%", width: "100%", y: "2", x: "10" })
@@ -43417,40 +43417,29 @@
 	  value: true
 	});
 	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
 	exports.default = function (rawData) {
 	  var city = rawData.city;
 	  var name = city.name;
 	  var id = city.id;
-	  var temps = rawData.list.map(function (weather) {
-	    return weather.main.temp;
-	  });
-	  var avgTemp = temps.reduce(function (previous, current) {
-	    return previous + current;
-	  }, 0) / temps.length;
-	  var maxTemp = Math.max.apply(Math, _toConsumableArray(temps));
-	  var minTemp = Math.min.apply(Math, _toConsumableArray(temps));
-	  var currentTemp = rawData.list[0].main.temp;
-	  var humidities = rawData.list.map(function (weather) {
-	    return weather.main.humidity;
-	  });
+	  var temps = [];
+	  var humidities = [];
 	  var rains = [];
 	  var hasRain = false;
-	  rawData.list.map(function (d) {
-	    if (d.rain && d.rain['3h']) {
-	      rains.push(d.rain['3h']);
-	      hasRain = true;
-	    } else {
-	      rains.push(0);
-	    }
+	  rawData.list.map(function (weather) {
+	    temps.push(weather.main.temp);
+	    humidities.push(weather.main.temp);
+	    rains.push(weather.rain && weather.rain['3h'] ? weather.rain['3h'] : 0);
 	  });
-	  var maxRain = false;
-	  var minRain = false;
-	  if (hasRain) {
-	    maxRain = Math.max.apply(Math, rains);
-	    minRain = Math.min.apply(Math, rains);
-	  }
+	  var maxTemp = Math.max.apply(Math, temps);
+	  var minTemp = Math.min.apply(Math, temps);
+	  var avgTemp = (temps.reduce(function (p, c) {
+	    return p + c;
+	  }), 0) / temps.length;
+	  var maxRain = Math.max.apply(Math, rains);
+	  var minRain = Math.min.apply(Math, rains);
+	  var currentTemp = temps[0];
+	  if (maxRain > 0) hasRain = true;
+	
 	  return {
 	    id: id,
 	    city: city,
@@ -43462,9 +43451,9 @@
 	    minTemp: minTemp,
 	    currentTemp: currentTemp,
 	    rains: rains,
+	    hasRain: hasRain,
 	    maxRain: maxRain,
-	    minRain: minRain,
-	    hasRain: hasRain
+	    minRain: minRain
 	  };
 	};
 

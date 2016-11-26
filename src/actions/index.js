@@ -10,14 +10,8 @@ export const RECEIVED_WEATHER = 'RECEIVED_WEATHER';
 export const TOGGLE_CITY = 'TOGGLE_CITY';
 export const CLOSE_CITY = 'CLOSE_CITY';
 
-const receivedWeather = json => {
-  return {
-    type: RECEIVED_WEATHER,
-    payload: json
-  }
-}
-
 export const fetchWeather = city => dispatch => {
+  dispatch({ type: REQUESTING_WEATHER });
   const url = `${ROOT_URL}&q=${city},us`;
     return fetch(url)
       .then(response => response.json())
@@ -25,6 +19,13 @@ export const fetchWeather = city => dispatch => {
         dispatch(receivedWeather(json))
       });
 };
+
+const receivedWeather = json => {
+  return {
+    type: RECEIVED_WEATHER,
+    payload: json
+  }
+}
 
 export function toggleSave(id) {
   return {

@@ -4,6 +4,9 @@ import weatherParser from '../helpers/weatherParser';
 
 export default function(cities = [], action) {
   switch (action.type) {
+    case ACTN.REQUESTING_WEATHER:
+      console.log('action ~~>', action);
+      return cities;
 
     case ACTN.RECEIVED_WEATHER:
       var newCity = weatherParser(action.payload);
@@ -26,9 +29,7 @@ export default function(cities = [], action) {
       var offlineCities = JSON.parse(localStorage.getItem('cities')) || [];
       const ID = action.payload.id;
       var newState = cities.map(city => {
-        if (city.id == ID) {
-          city.saved = !city.saved;
-        }
+        if (city.id == ID) city.saved = !city.saved;
         return city;
       });
       var newOfflineCities = newState.filter(city => city.saved);
