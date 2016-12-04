@@ -2,11 +2,13 @@
 
 import React, { Component } from 'react';
 import { TransitionMotion, Motion, spring, presets } from 'react-motion';
+import { Link } from 'react-router';
 
 
 import SaveIcon from '../components/save-icon';
 import WeatherChart from '../components/chart-weather';
 import RainChart from '../components/chart-rain';
+import Grid from '../components/grid';
 
 class CityRow extends Component {
   constructor(props) {
@@ -39,16 +41,27 @@ class CityRow extends Component {
     const color = this.props.color;
     let closeIcon = (<i className="fa fa-close close-icon icon"></i>);
     let currentSaveIcon = (this.props.data.saved)
-      ? (<i className="fa fa-star save-icon icon"></i>)
-      : (<i className="fa fa-star-o save-icon icon"></i>);
+      ? (<i className="fa fa-toggle-on save-icon icon"></i>)
+      : (<i className="fa fa-toggle-off save-icon icon"></i>);
     return (
         <div className="row city-row card" style={{transform: `translateY(${this.props.style.y}px)`, opacity: this.props.style.opacity}}>
           <div className="city-row-inner">
+
           <div className="icon-wrapper">
-            <span onClick={() => this.props.onClose(ID)}>{closeIcon}</span>
-            <span onClick={() => this.props.onToggleSave(ID)}>{currentSaveIcon}</span>
+            <span onClick={() => this.props.onClose(ID)}>
+              {closeIcon}
+            </span>
+            <span onClick={() => this.props.onToggleSave(ID)}>
+              {currentSaveIcon}
+            </span>
+            <span>
+              <Link to={`/city/${ID}`}>
+                <i className="fa fa-expand detail-icon icon"></i>
+              </Link>
+            </span>
           </div>
-          <div className="col-md-4">
+
+          <div className="col-md-4 city-column">
             <div className="name-plate">
               <h2>{data.name}</h2>
               <hr/>
@@ -56,13 +69,21 @@ class CityRow extends Component {
             </div>
             {this.renderTempBar(data.currentTemp/105)}
           </div>
-          <div className="col-md-4">
-            <div className="rain-wrapper">
-              <RainChart title={'Rain'} data={data} units="°" />
+
+          <div className="col-md-4 city-column">
+            <div className="chart-wrapper temp-wrapper">
               <WeatherChart title={'Temperature'} data={data.temps} color={color} units="°" />
+              <RainChart title={'Rain'} data={data} units="°" />
+              <Grid />
             </div>
           </div>
-          <div className="col-md-4"><WeatherChart title={'Humidity'} data={data.humidities} color={color} units="%" /></div>
+
+          <div className="col-md-4 city-column">
+            <div className="chart-wrapper humidity-wrapper">
+              <WeatherChart title={'Humidity'} data={data.humidities} color={color} units="%" />
+              <Grid />
+            </div>
+          </div>
           <div className="clearfix"></div>
           </div>
         </div>

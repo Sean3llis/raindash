@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from '../actions/index';
-
+import { Typeahead } from 'react-typeahead';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -54,7 +54,6 @@ class SearchBar extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state ~~>', state);
   return {
     cities: state.cities,
     requestingWeather: state.requestingWeather

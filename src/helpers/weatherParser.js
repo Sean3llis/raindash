@@ -10,7 +10,7 @@ export default (rawData) => {
   let hasRain = false;
   rawData.list.map(weather => {
     temps.push(weather.main.temp);
-    humidities.push(weather.main.temp);
+    humidities.push(weather.main.humidity);
     rains.push((weather.rain && weather.rain['3h']) ? weather.rain['3h'] : 0);
   });
   const maxTemp = Math.max(...temps);
@@ -20,7 +20,7 @@ export default (rawData) => {
   const minRain = Math.min(...rains);
   const currentTemp = temps[0];
   if (maxRain > 0) hasRain = true;
-
+  console.log('humidities ~~>', humidities);
   return {
     id,
     city,

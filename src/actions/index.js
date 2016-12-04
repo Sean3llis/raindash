@@ -17,6 +17,7 @@ export const fetchWeather = city => dispatch => {
       .then(response => response.json())
       .then(json => {
         dispatch({ type: REQUESTING_WEATHER, payload: false });
+        console.log('json ~~>', json);
         dispatch(receivedWeather(json))
       });
 };
@@ -29,6 +30,7 @@ const receivedWeather = json => {
 }
 
 export function toggleSave(id) {
+  console.log('toggle save');
   return {
     type: TOGGLE_CITY,
     payload: { id }

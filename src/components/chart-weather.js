@@ -10,7 +10,7 @@ const min = data => _.round(_.min(data));
 
 export default props => {
   return (
-    <div className="chart-wrapper">
+    <div className="chart">
       <div className="legend legend-x now">0d</div>
       <div className="legend legend-x mid">2.5d</div>
       <div className="legend legend-x later">5d</div>
@@ -21,7 +21,6 @@ export default props => {
         <SparklinesLine style={{ strokeWidth: 1, stroke: "#1e2f41", fill: "none" }} />
         <SparklinesSpots size={2} style={{ fill: "#ffffff", stroke: "#1e2f41", strokeWidth: 1 }} />
       </Sparklines>
-      <Grid />
     </div>
   );
 }

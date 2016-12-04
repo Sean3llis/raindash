@@ -7,6 +7,9 @@ export default class App extends Component {
   render() {
     return (
       <div id="app">
+        <div id="logo">
+          <img className="logo" src="logo.svg" alt=""/>
+        </div>
         <SearchBar />
         <WeatherList />
         {/*<Footer />*/}
