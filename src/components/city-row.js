@@ -54,11 +54,6 @@ class CityRow extends Component {
             <span onClick={() => this.props.onToggleSave(ID)}>
               {currentSaveIcon}
             </span>
-            <span>
-              <Link to={`/city/${ID}`}>
-                <i className="fa fa-expand detail-icon icon"></i>
-              </Link>
-            </span>
           </div>
 
           <div className="col-md-4 city-column">

@@ -9,6 +9,7 @@ const min = data => _.round(_.min(data));
 
 export default props => {
   const {rains, hasRain, maxRain, minRain} = props.data;
+  const height = props.height || 100;
   if (hasRain) {
     return (
       <div className="rain-chart">
@@ -16,7 +17,7 @@ export default props => {
         <div className="legend legend-rain min">{`${minRain}`}&quot;</div>
         <div className="legend rain-key">Inches of Rainfall</div>
         <Sparklines height={100} margin={20} data={rains}>
-          <SparklinesLine style={{ fill: "#66ccc1", fillOpacity: 1, stroke: 'none' }}/>
+          <SparklinesLine style={{ fill: "#66ccc1", fillOpacity: 0.85, stroke: 'none' }}/>
         </Sparklines>
       </div>
     );
