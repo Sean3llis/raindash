@@ -1,4 +1,4 @@
 # RAINDASH
 A weather dashboard utilizing React + Redux
 ---
-![logo](http://raindash.surge.sh/logo.svg | width=200)
+<img src="http://raindash.surge.sh/logo.svg" alt="logo" style="width: 200px;"/>
